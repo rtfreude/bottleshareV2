@@ -12,7 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+    "passport": "^0.3.2"
   },
   "devDependencies": {},
   "description": ""
