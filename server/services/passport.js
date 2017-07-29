@@ -4,6 +4,19 @@ const mongoose = require('mongoose')
 const keys = require('../config/keys');
 
 const User = mongoose.model('users');
+
+//add identifying info to cookie
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+//pull id out and turn back to user
+passport.deserializeUser((id, done) => {
+  User.findById(id)
+    .then( user => {
+      done(null, user);
+    })
+});
 //set up passport with our client parameters
 //and a callback url to redirect users back to our server
 
@@ -14,6 +27,15 @@ passport.use(
     callbackURL: '/auth/google/callback'
   },
   (accessToken, refreshToken, profile, done) => {
-    new User({ googleId: profile.id }).save();
+    User.findOne({ googleId: profile.id })
+      .then((existingUser) => {
+      if (existingUser) {
+        done(null, existingUser)
+      } else {
+        new User({ googleId: profile.id })
+          .save()
+          .then(user => done(null, user))
+      }
+    })
   })
 );
