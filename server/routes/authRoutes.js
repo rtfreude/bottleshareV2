@@ -11,4 +11,13 @@ module.exports = app => {
 
   //user has the code now and access to our server
   app.get('/auth/google/callback', passport.authenticate('google'));
+
+  app.get('/api/logout', (req, res) => {
+    req.logout();
+    res.send(req.user + "not signed it")
+  })
+
+  app.get('/api/current_user', (req, res) => {
+    res.send(JSON.stringify(req.user))
+  })
 }
