@@ -9,9 +9,20 @@ module.exports = app => {
     })
   );
 
+  app.get(
+    '/auth/facebook',
+    passport.authenticate('facebook'));
+
   //user has the code now and access to our server
   app.get('/auth/google/callback',
     passport.authenticate('google'),
+    (req, res) => {
+      res.redirect('/dashboard');
+    }
+  );
+
+  app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', { failureRedirect: '/' }),
     (req, res) => {
       res.redirect('/dashboard');
     }
@@ -26,3 +37,4 @@ module.exports = app => {
     res.send(req.user)
   })
 }
+
