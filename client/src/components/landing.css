@@ -1,5 +1,7 @@
 .landing-container {
-  background-image: url("StockSnap_PGSJJJX22A.jpg");
-  width: 100%;
-  height: 100%;
+  background-image: url("beer.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  z-index: -1;
 }

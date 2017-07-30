@@ -1,22 +1,42 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import './header.css'
 
 class Header extends Component {
+
+  renderContent() {
+    switch (this.props.auth) {
+      case null:
+        return;
+      case false:
+        return <li><a href="/auth/google">Google Login</a></li>;
+      default:
+        return <li><a href="/api/logout">Logout</a></li>;
+    }
+  }
+
   render() {
+
     return (
-       <div>
-        <nav>
-          <div className="nav-wrapper">
-            <a href="#" className="brand-logo">Logo</a>
-            <ul id="nav-mobile" className="right hide-on-med-and-down">
-              <li><a href="sass.html">Sass</a></li>
-              <li><a href="badges.html">Components</a></li>
-              <li><a href="collapsible.html">JavaScript</a></li>
-            </ul>
-          </div>
-        </nav>
+       <nav className="header-nav">
+        <div className="nav-wrapper N/A transparent">
+          <Link
+            to={this.props.auth ? '/dashboard' : '/'}
+            className="left brand-logo"
+            >
+            BottleShare
+          </Link>
+          <ul className="right">
+              {this.renderContent()}
+          </ul>
         </div>
+      </nav>
     )
   }
 }
+function mapStateToProps({ auth }) {
+  return { auth }
+}
 
-export default Header;
+export default connect(mapStateToProps)(Header)

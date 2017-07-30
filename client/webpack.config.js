@@ -1,4 +1,4 @@
-/*const path = require('path');
+const path = require('path');
 const webpack = require('webpack')
 // const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // console.log('path', __dirname + './app/app.jsx');
@@ -78,4 +78,4 @@ module.exports = {
     ]
   },
   devtool: 'cheap-module-eval-source-map'
-};*/
+};
