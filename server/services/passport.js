@@ -73,9 +73,3 @@ passport.use(new LinkedinStrategy({
   )
 );
 
-//   function(token, tokenSecret, profile, done) {
-//     User.findOrCreate({ linkedinId: profile.id }, function (err, user) {
-//       return done(err, user);
-//     });
-//   }
-// ));

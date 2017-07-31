@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import './header.css'
+import LoginModal from './loginModal';
+import RootModal from './RootModal'
+import './header.css';
+//import $ from 'jquery'
 
 class Header extends Component {
 
@@ -12,9 +15,8 @@ class Header extends Component {
       case false:
         return (
                 <div>
-                  <li><a href="/auth/google">Google Login</a></li>
-                  <li><a href="/auth/facebook">Facebook Login</a></li>
-                  <li><a href="/auth/linkedin">Linkedin Login</a></li>
+                  <LoginModal />
+                  <RootModal />
                 </div>
                )
       default:
@@ -26,7 +28,7 @@ class Header extends Component {
 
     return (
        <nav className="header-nav">
-        <div className="nav-wrapper N/A transparent">
+        <div className="nav-wrapper black">
           <Link
             to={this.props.auth ? '/dashboard' : '/'}
             className="left brand-logo"
@@ -41,8 +43,8 @@ class Header extends Component {
     )
   }
 }
-function mapStateToProps({ auth }) {
-  return { auth }
+function mapStateToProps({ auth, loginModal }) {
+  return { auth, loginModal }
 }
 
 export default connect(mapStateToProps)(Header)
