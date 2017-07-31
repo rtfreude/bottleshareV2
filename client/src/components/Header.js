@@ -14,6 +14,7 @@ class Header extends Component {
                 <div>
                   <li><a href="/auth/google">Google Login</a></li>
                   <li><a href="/auth/facebook">Facebook Login</a></li>
+                  <li><a href="/auth/linkedin">Linkedin Login</a></li>
                 </div>
                )
       default:

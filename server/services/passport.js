@@ -1,6 +1,7 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
+const LinkedinStrategy = require('passport-linkedin').Strategy;
 const mongoose = require('mongoose')
 const keys = require('../config/keys');
 
@@ -56,8 +57,25 @@ passport.use(
   }
 ));
 
+passport.use(new LinkedinStrategy({
+    consumerKey: keys.linkedinKey,
+    consumerSecret: keys.linkedinSecret,
+    callbackURL: "/auth/linkedin/callback"
+  },
+  async (accessToken, refreshToken, profile, done) => {
+    const existingUser = await User.findOne({ linkedinId: profile.id })
+    if (existingUser) {
+      return done(null, existingUser);
+    }
+    const user =  await new User({ linkedinId: profile.id }).save();
+    done(null, user);
+    }
+  )
+);
 
-
-
-
-
+//   function(token, tokenSecret, profile, done) {
+//     User.findOrCreate({ linkedinId: profile.id }, function (err, user) {
+//       return done(err, user);
+//     });
+//   }
+// ));
