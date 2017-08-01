@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 //import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom';
+import RootModal from './RootModal';
+import { showModal } from '../actions/index'
 import './header.css';
 //import $ from 'jquery'
 
@@ -14,9 +16,8 @@ class Header extends Component {
       case false:
         return (
                 <div>
-                  <li><a href="/auth/google">Google Login</a></li>
-                  <li><a href="/auth/facebook">Facebook Login</a></li>
-                  <li><a href="/auth/linkedin">Linkedin Login</a></li>
+                  <a className="waves-effect waves-light btn modal-trigger" data-target="modal1" onClick={()=>this.props.actions.dispatch(this.props.actions.showModal)}>Modal</a>
+                  <RootModal />
                 </div>
                )
       default:
@@ -25,6 +26,7 @@ class Header extends Component {
   }
 
   render() {
+
     return (
        <nav className="header-nav">
         <div className="nav-wrapper black">
@@ -42,8 +44,14 @@ class Header extends Component {
     )
   }
 }
-function mapStateToProps({ auth }) {
-  return { auth }
+function mapStateToProps({ auth, loginModal }) {
+  return { auth, loginModal }
 }
 
-export default connect(mapStateToProps)(Header)
+/*function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  }
+}*/
+
+export default connect(mapStateToProps, { showModal })(Header)
