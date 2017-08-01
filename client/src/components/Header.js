@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+//import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom';
-import LoginModal from './loginModal';
-import RootModal from './RootModal'
 import './header.css';
 //import $ from 'jquery'
 
@@ -15,8 +14,9 @@ class Header extends Component {
       case false:
         return (
                 <div>
-                  <LoginModal />
-                  <RootModal />
+                  <li><a href="/auth/google">Google Login</a></li>
+                  <li><a href="/auth/facebook">Facebook Login</a></li>
+                  <li><a href="/auth/linkedin">Linkedin Login</a></li>
                 </div>
                )
       default:
@@ -25,7 +25,6 @@ class Header extends Component {
   }
 
   render() {
-
     return (
        <nav className="header-nav">
         <div className="nav-wrapper black">
@@ -43,8 +42,8 @@ class Header extends Component {
     )
   }
 }
-function mapStateToProps({ auth, loginModal }) {
-  return { auth, loginModal }
+function mapStateToProps({ auth }) {
+  return { auth }
 }
 
 export default connect(mapStateToProps)(Header)
