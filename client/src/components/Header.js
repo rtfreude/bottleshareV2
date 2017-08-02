@@ -2,10 +2,29 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 //import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap'
 import './header.css';
+import LogModal from './loginmodal/Modal'
 //import $ from 'jquery'
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showModal: false
+    }
+    this.close = this.close.bind(this);
+    this.open = this.open.bind(this);
+  }
+
+  close() {
+    this.setState({showModal: false})
+  }
+
+  open() {
+    console.log('open')
+    this.setState({showModal: true})
+  }
 
   renderContent() {
     switch (this.props.auth) {
@@ -14,9 +33,7 @@ class Header extends Component {
       case false:
         return (
                 <div>
-                  <li><a href="/auth/google">Google Login</a></li>
-                  <li><a href="/auth/facebook">Facebook Login</a></li>
-                  <li><a href="/auth/linkedin">Linkedin Login</a></li>
+                <a className="waves-effect waves-light btn" onClick={this.open}><i className="material-icons right">menu</i>Login</a>
                 </div>
                )
       default:
@@ -26,6 +43,7 @@ class Header extends Component {
 
   render() {
     return (
+      <div>
        <nav className="header-nav">
         <div className="nav-wrapper black">
           <Link
@@ -38,7 +56,26 @@ class Header extends Component {
               {this.renderContent()}
           </ul>
         </div>
+        {
+          this.state.showModal
+            ? <LogModal
+              showModal={this.state.showModal}
+              close={this.close}
+              open={this.open}
+            />
+            : null
+        }
       </nav>
+      {
+          this.state.showModal
+            ? <LogModal
+              showModal={this.state.showModal}
+              close={this.close}
+              open={this.open}
+            />
+            : null
+        }
+        </div>
     )
   }
 }
