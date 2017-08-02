@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER } from './types';
-import { SHOW_MODAL, HIDE_MODAL } from './types';
+import { FETCH_USER, SHOW_MODAL, HIDE_MODAL, SET_NAME } from './types';
 
 
 export const fetchUser = () => async dispatch => {
@@ -11,20 +10,30 @@ export const fetchUser = () => async dispatch => {
   })
 };
 
-export const showModal = ({ modalType, modalProps }) => {
-  console.log('show modal action hit in action/index.js')
+export function showModal(message) {
   return {
     type: SHOW_MODAL,
-    modalType: 'LOGIN_LIST',
-    modalProps: modalProps
+    message
   }
 }
 
-export const hideModal = ({ modalType, modalProps }) => {
+export function hideModal() {
   return {
-    type: HIDE_MODAL,
-    modalType: 'LOGIN_LIST',
-    modalProps: modalProps
+    type: HIDE_MODAL
   }
 }
 
+export function setName(name) {
+  return {
+    type: SET_NAME,
+    name
+  }
+}
+
+export function setNameAndHideModal(name) {
+  return dispatch => {
+    if (!name || name.trim() === '') return
+    dispatch(setName(name))
+    dispatch(hideModal())
+  }
+}

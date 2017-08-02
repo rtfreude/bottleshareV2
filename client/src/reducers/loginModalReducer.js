@@ -1,23 +1,34 @@
-import { SHOW_MODAL } from '../actions/types';
-import { HIDE_MODAL } from '../actions/types';
+import {SHOW_MODAL, HIDE_MODAL, SET_NAME} from '../actions/types'
 
-const initialState = {
-  modalType: null,
-  modalProps: {}
-}
+export function modals(state = {
+  isShowing: false,
+  message: ''
+}, action) {
 
-export default function modal(state = initialState, action) {
-  console.log('modal reducer: ', action)
- switch (action.type) {
+  switch (action.type) {
     case SHOW_MODAL:
-      return {
-        modalType: action.modalType,
-        modalProps: action.modalProps
-      }
+      return Object.assign({}, state, {
+        isShowing: true,
+        message: action.message
+      })
     case HIDE_MODAL:
-      return initialState
+      return Object.assign({}, state, {
+        isShowing: false
+      })
     default:
       return state
   }
+
+}
+
+export function name(state = null, action) {
+
+  switch (action.type) {
+    case SET_NAME:
+      return action.name
+    default:
+      return state
+  }
+
 }
 

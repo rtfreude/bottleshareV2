@@ -1,0 +1,11 @@
+.confirm-modal-content {
+  background-color: black;
+  width: 500px;
+  height: 500px;
+  z-index: 2000;
+}
+
+.modal-backdrop {
+  background-color: white !important;
+  opacity: .5;
+}
