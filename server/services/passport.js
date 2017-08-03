@@ -44,7 +44,8 @@ passport.use(
     clientID: keys.facebookClientID,
     clientSecret: keys.facebookClientSecret,
     callbackURL: "/auth/facebook/callback",
-    profileFields: ['id', 'email']
+    profileFields: ['id', 'email'],
+    proxy: true
   },
   async (accessToken, refreshToken, profile, cb) => {
     const existingUser = await User.findOne({ facebookId: profile.id })
@@ -60,7 +61,8 @@ passport.use(
 passport.use(new LinkedinStrategy({
     consumerKey: keys.linkedinKey,
     consumerSecret: keys.linkedinSecret,
-    callbackURL: "/auth/linkedin/callback"
+    callbackURL: "/auth/linkedin/callback",
+    proxy: true
   },
   async (accessToken, refreshToken, profile, done) => {
     const existingUser = await User.findOne({ linkedinId: profile.id })
