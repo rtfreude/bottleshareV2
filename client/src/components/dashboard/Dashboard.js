@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './landing.css'
+
 
 class Dashboard extends Component {
   render() {

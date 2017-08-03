@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-//import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap'
 import './header.css';
-import LogModal from './loginmodal/Modal'
-//import $ from 'jquery'
+import LogModal from '../loginmodal/Modal'
 
 class Header extends Component {
   constructor(props) {

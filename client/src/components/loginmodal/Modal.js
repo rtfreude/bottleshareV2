@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
 import './modal.css'
 
 class LogModal extends Component {
@@ -8,18 +8,18 @@ class LogModal extends Component {
     return (
       <Modal show={this.props.showModal} onHide={this.props.close.bind(this)} className="modal">
         <Modal.Header closeButton>
-          <Modal.Title>Login</Modal.Title>
+          <Modal.Title>Please Login</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div>
-            <li><a href="/auth/google">Google Login</a></li>
-            <li><a href="/auth/facebook">Facebook Login</a></li>
-            <li><a href="/auth/linkedin">Linkedin Login</a></li>
+          <div className="soc-buttons">
+            <a href="/auth/google" className="fa fa-google"></a>
+            <a href="/auth/facebook" className="fa fa-facebook"></a>
+            <a href="/auth/linkedin" className="fa fa-linkedin"></a>
           </div>
         </Modal.Body>
-        <Modal.Footer>
+        {/*<Modal.Footer>
           <a className="waves-effect waves-light btn" onClick={this.props.close.bind(this)}>Close</a>
-        </Modal.Footer>
+        </Modal.Footer>*/}
       </Modal>
     );
   }

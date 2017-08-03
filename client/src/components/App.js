@@ -3,9 +3,9 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
-import Header from './Header'
-import Landing from './Landing'
-import Dashboard from './Dashboard'
+import Header from './header/Header'
+import Landing from './landing/Landing'
+import Dashboard from './dashboard/Dashboard'
 
 import './app.css'
 
