@@ -21,7 +21,7 @@ passport.deserializeUser((id, done) => {
 });
 //set up passport with our client parameters
 //and a callback url to redirect users back to our server
-
+//add proxy true to fix http problem
 passport.use(
   new GoogleStrategy({
     clientID: keys.googleClientID,

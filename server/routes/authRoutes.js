@@ -3,8 +3,6 @@ const passport = require('passport');
 // 'google' calls GoogleStrategy above with a scope of info to get
 module.exports = app => {
 
-
-
   app.get(
     '/auth/google',
     passport.authenticate('google', {
