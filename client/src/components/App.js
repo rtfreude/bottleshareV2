@@ -17,14 +17,13 @@ class App extends Component {
   }
 
   render() {
-    console.log('render', this.props)
     return (
       <div className='app-container'>
         <BrowserRouter>
           <div>
             <Header />
             <Route exact path='/' component={Landing} />
-            <Route path='/dashboard' component={Dashboard} />
+            <Route exact path='/dashboard' component={Dashboard} />
           </div>
         </BrowserRouter>
       </div>

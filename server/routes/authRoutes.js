@@ -22,8 +22,9 @@ module.exports = app => {
   app.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/' }),
     (req, res) => {
-      res.redirect('/dashboard#');
+      res.redirect('/dashboard');
     }
+    //return next();
   );
 
   app.get('/auth/facebook/callback',
@@ -31,6 +32,7 @@ module.exports = app => {
     (req, res) => {
       res.redirect('/dashboard');
     }
+    //return next();
   );
 
   app.get('/auth/linkedin/callback',
@@ -38,6 +40,7 @@ module.exports = app => {
     (req, res) => {
       res.redirect('/dashboard');
     }
+    //return next();
   );
 
   app.get('/api/logout', (req, res) => {
