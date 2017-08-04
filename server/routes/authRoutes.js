@@ -32,7 +32,7 @@ module.exports = app => {
     (req, res) => {
       res.redirect('/dashboard');
     }
-    //return next();
+
   );
 
   app.get('/auth/linkedin/callback',
