@@ -7,7 +7,8 @@ const fetch = FetchFill.fetchFill.fetch
 module.exports = app => {
   //a rough search endpoint used for grabbing autocomplete input--autocomplete needs to be improved
   app.get('/api/searchbeer', (req, res) => {
-    let userReq = 'Miller Lite';
+    console.log('server req', req.query.input)
+    let userReq = req.query.input;
     //let userReq = req.query.inputValue; //hardcoded search criteria, I would Exptect 'Naughty 90' to be one of the results
     let allBeers = [];  //array to be returned to the user
 

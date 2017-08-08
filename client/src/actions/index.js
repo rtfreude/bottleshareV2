@@ -10,9 +10,13 @@ export const fetchUser = () => async dispatch => {
   })
 };
 
-export const fetchBeer = () => async dispatch => {
-  console.log('action been hit')
-  const res = await axios.get('/api/searchbeer')
+export const fetchBeer = (input) => async dispatch => {
+
+  const res = await axios.get('/api/searchbeer', {
+    params: {
+      input: input
+    }
+  })
   console.log('res', res)
   dispatch({
     type: FETCH_BEER,

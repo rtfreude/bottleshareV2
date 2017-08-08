@@ -15,12 +15,11 @@ class Header extends Component {
   }
 
   close() {
-    this.setState({showModal: false})
+    this.setState({showModal: false});
   }
 
   open() {
-    console.log('open')
-    this.setState({showModal: true})
+    this.setState({showModal: true});
   }
 
   renderContent() {
