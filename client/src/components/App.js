@@ -7,6 +7,7 @@ import Header from './header/Header';
 import Landing from './landing/Landing';
 import Dashboard from './dashboard/Dashboard';
 import Beer from './Beer/Beer';
+import Breweries from './Breweries/Breweries';
 
 import './app.css'
 
@@ -26,6 +27,7 @@ class App extends Component {
             <Route exact path='/' component={Landing} />
             <Route exact path='/dashboard' component={Dashboard} />
             <Route exact path='/beer' component={Beer} />
+            <Route exact path='/breweries' component={Breweries} />
           </div>
         </BrowserRouter>
       </div>

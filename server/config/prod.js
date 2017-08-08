@@ -6,5 +6,6 @@ module.exports = {
   linkedinKey: process.env.LINKEDIN_KEY,
   linkedinSecret: process.env.LINKEDIN_SECRET,
   mongoURI: process.env.MONGO_URI,
-  cookieKey: process.env.COOKIE_KEY
+  cookieKey: process.env.COOKIE_KEY,
+  beerKey: process.env.BEER_KEY
 }

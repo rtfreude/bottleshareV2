@@ -1,20 +1,21 @@
-const Fetchfill = require('./fetch-fill')
+const FetchFill = require('./fetch-fill')
+const keys = require('../config/keys');
 
-const fetch = Fetchfill.fetch
+const fetch = FetchFill.fetchFill.fetch
 
 // routes for all beer searches
 module.exports = app => {
   //a rough search endpoint used for grabbing autocomplete input--autocomplete needs to be improved
   app.get('/api/searchbeer', (req, res) => {
-    console.log(req.query.inputValue)
-    let userReq = req.query.inputValue; //hardcoded search criteria, I would Exptect 'Naughty 90' to be one of the results
+    let userReq = 'Miller Lite';
+    //let userReq = req.query.inputValue; //hardcoded search criteria, I would Exptect 'Naughty 90' to be one of the results
     let allBeers = [];  //array to be returned to the user
 
     const getAllBeers = function(page) {
       let pageNum = page || 1;
       let beers = [];
 
-      let url = 'http://api.brewerydb.com/v2/search?key=' + API_KEY + '&q=' + userReq + '&type=beer&p=' + pageNum;
+      let url = 'http://api.brewerydb.com/v2/search?key=' + keys.beerKey + '&q=' + userReq + '&type=beer&p=' + pageNum;
 
       fetch(url)
         .then(res => res.json())
