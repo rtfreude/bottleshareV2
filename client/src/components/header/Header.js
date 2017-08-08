@@ -34,7 +34,18 @@ class Header extends Component {
                 </div>
                )
       default:
-        return <li><a href="/api/logout">Logout</a></li>;
+        return (
+                <div>
+                  <li>
+                    <Link
+                    to='/beer'
+                    >
+                    Search Beer
+                    </Link>
+                  </li>
+                  <li><a href="/api/logout">Logout</a></li>
+                </div>
+                )
     }
   }
 

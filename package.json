@@ -20,6 +20,7 @@
     "concurrently": "^3.5.0",
     "cookie-session": "^2.0.0-beta.2",
     "express": "^4.15.3",
+    "fetch-ponyfill": "^4.1.0",
     "mongoose": "^4.11.4",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
@@ -29,4 +30,3 @@
   "devDependencies": {},
   "description": ""
 }
-
