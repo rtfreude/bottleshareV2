@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { FETCH_USER } from './types';
-import { FETCH_BEER } from './types';
+import { FETCH_USER, FETCH_BEER_DETAILS, FETCH_BEER } from './types';
+
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get('/api/current_user')
@@ -11,17 +11,26 @@ export const fetchUser = () => async dispatch => {
 };
 
 export const fetchBeer = (input) => async dispatch => {
-
   const res = await axios.get('/api/searchbeer', {
     params: {
       input: input
     }
   })
-  console.log('res', res)
   dispatch({
     type: FETCH_BEER,
     payload: res.data
   })
 };
 
+export const fetchBeerDetails = (beer) => async dispatch => {
+  const res = await axios.get('/api/beerdetails', {
+    params: {
+      beer: beer
+    }
+  })
+  dispatch({
+    type: FETCH_BEER_DETAILS,
+    payload: res.data.data[0]
+  })
+};
 

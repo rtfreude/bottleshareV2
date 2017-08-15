@@ -1,5 +1,6 @@
-const FetchFill = require('./fetch-fill')
+const FetchFill = require('./fetch-fill');
 const keys = require('../config/keys');
+const request = require('request');
 
 const fetch = FetchFill.fetchFill.fetch
 
@@ -7,7 +8,7 @@ const fetch = FetchFill.fetchFill.fetch
 module.exports = app => {
   //a rough search endpoint used for grabbing autocomplete input--autocomplete needs to be improved
   app.get('/api/searchbeer', (req, res) => {
-    console.log('server req', req.query.input)
+    //console.log('server req', req.query.input)
     let userReq = req.query.input;
     //let userReq = req.query.inputValue; //hardcoded search criteria, I would Exptect 'Naughty 90' to be one of the results
     let allBeers = [];  //array to be returned to the user
@@ -37,7 +38,7 @@ module.exports = app => {
         } else if (pageNum >= 2) {
           var flattened = [].concat.apply([], allBeers);
           var sorted = flattened.sort().slice(0, 8)
-          console.log(sorted)
+          //console.log(sorted)
           res.send(sorted);
           return;
 
@@ -49,4 +50,18 @@ module.exports = app => {
     };
     getAllBeers(1); //start query on page 1
   });
+
+  app.get('/api/beerdetails', (req, res) => {
+    //console.log('backend beernam', req.query.beer)
+    let userReq = req.query.beer;
+
+    var url = 'http://api.brewerydb.com/v2/beers?key=' + keys.beerKey+ '&name='+ userReq;
+
+    request(url, function(err, resp, body) {
+      let parsedBody = JSON.parse(body);
+      //console.log('server parsed body', parsedBody)
+      res.send(parsedBody);
+    })
+  });
+
 }

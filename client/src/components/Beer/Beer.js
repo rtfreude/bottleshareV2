@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchBeer } from '../../actions/index';
+import { fetchBeer, fetchBeerDetails } from '../../actions/index';
 import $                    from 'jquery';
 import { AutoComplete }     from 'material-ui';
 import getMuiTheme          from 'material-ui/styles/getMuiTheme';
@@ -22,12 +22,20 @@ class Beer extends Component {
       inputValue: '',
       displayName: 'Naughty 90',
       dataSource: [],
-      beerStyle: ''
+      beerStyle: '',
+      beerDesc: '',
+      beerTaste: '',
+      beerImg: '',
+      beerAbv: '',
+      srmMax: '',
+      gravity: '',
+      ibu: ''
     }
     this.onUpdateInput = this.onUpdateInput.bind(this);
     this.close = this.close.bind(this);
     this.open = this.open.bind(this);
     this.toggleModal = this.toggleModal.bind(this)
+    this.getDetails = this.getDetails.bind(this)
   }
 
   close() {
@@ -40,31 +48,44 @@ class Beer extends Component {
 
   onUpdateInput(inputValue) {
     const self = this;
-    this.setState({
+    self.setState({
       inputValue: inputValue
-    }, function() {
-      this.props.fetchBeer(inputValue);
-      self.performSearch();
     })
+
+    self.props.fetchBeer(inputValue)
+      .then(() => self.performSearch())
+      .catch(err => console.log('input error occurred: ' + err))
+  }
+
+
+  getDetails () {
+    const self = this;
+    self.props.fetchBeerDetails(this.state.inputValue)
+      .then(() => self.beerCall())
+      .then(() => self.toggleModal())
+      .catch(err => console.log('get details error: ' + err))
+
   }
 
   toggleModal () {
     const self = this;
-    self.beerCall();
     self.setState({
       showModal: !self.state.showModal
     })
   }
 
+
   componentDidMount() {
-    this.beerCall(this.state.inputValue);
+    const self = this;
+    self.beerCall(self.state.inputValue);
+
   }
 
   performSearch() {
     const self = this;
-
+    console.log(this.props.beer)
     if(this.state.inputValue !== '') {
-        console.log('perform search', this.props.beer)
+        //console.log('perform search', this.props.beer)
         self.setState({
           dataSource: this.props.beer
         });
@@ -72,9 +93,7 @@ class Beer extends Component {
   }
 
   beerCall() {
-    return $.get('/beername', {beerRequest: this.state.inputValue})
-    .then((data) => {
-      console.log('beerCall', data)
+      let beerInfo = this.props.beerDetails
       let srm;
       let fg;
       let description;
@@ -82,48 +101,48 @@ class Beer extends Component {
       let shortName;
       let abv;
       let image;
-
-      if(data.data[0].style !== undefined) {
-        srm = (+data.data[0].style.srmMax+(+data.data[0].style.srmMin))/2;
-        taste = data.data[0].style.description;
-        shortName = data.data[0].style.shortName;
+      console.log('beercall beerinfo', this.props.beerDetails)
+      if(beerInfo.style !== undefined) {
+        srm = (+beerInfo.style.srmMax+(+beerInfo.style.srmMin))/2;
+        taste = beerInfo.style.description;
+        shortName = beerInfo.style.shortName;
       } else {
         srm = 'No SRM'
         taste = 'No Description'
         shortName = 'No Name'
       }
 
-      if(data.data[0].style !== undefined) {
-        fg = parseFloat((+data.data[0].style.fgMax+(+data.data[0].style.fgMin))/2).toFixed(4);
+      if(beerInfo.style !== undefined) {
+        fg = parseFloat((+beerInfo.style.fgMax+(+beerInfo.style.fgMin))/2).toFixed(4);
       } else {
         fg = 'No fg'
       }
 
-      if(data.data[0].description !== undefined) {
-        description = data.data[0].description;
+      if(beerInfo.description !== undefined) {
+        description = beerInfo.description;
       } else {
         description = 'No description available...'
       }
 
-      if(data.data[0].labels !== undefined) {
-        image = data.data[0].labels.medium;
+      if(beerInfo.labels !== undefined) {
+        image = beerInfo.labels.medium;
       } else {
         image = 'beer.jpg'
       }
 
       this.setState({
-        beerName: data.data[0].name,
-        displayName: data.data[0].name,
+        beerName: beerInfo.name,
+        displayName: beerInfo.name,
         beerDesc: description,
         beerTaste: taste,
         beerImg: image,
         beerStyle: shortName,
-        beerAbv: data.data[0].abv,
+        beerAbv: beerInfo.abv,
         srmMax: srm,
         gravity: fg,
-        ibu: data.data[0].ibu
+        ibu: beerInfo.ibu
       })
-    })
+
   }
 
     render() {
@@ -138,7 +157,7 @@ class Beer extends Component {
               filter            = {AutoComplete.noFilter}
               //onTouchTap        = {this.handleClick}
               onUpdateInput     = {this.onUpdateInput}
-              onNewRequest      = {this.toggleModal}
+              onNewRequest      = {this.getDetails}
               floatingLabelText = "Input beer name and hit enter..."
             />
           </MuiThemeProvider>
@@ -167,15 +186,19 @@ class Beer extends Component {
   }
 }
 
-function mapStateToProps({ beer }) {
-  console.log('beer', beer)
-  return { beer }
+function mapStateToProps({ beer, beerDetails }) {
+  //console.log('beerDetails', beerDetails)
+  return { beer, beerDetails }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    fetchBeer: fetchBeer
+    fetchBeer: fetchBeer,
+    fetchBeerDetails: fetchBeerDetails
   }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Beer)
+
+
+

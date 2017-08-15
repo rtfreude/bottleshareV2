@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Button, Modal, Popover, Tooltip, OverlayTrigger } from 'react-bootstrap'
-import $                    from 'jquery';
 
 import BeerPopOver from './BeerPopOver';
 import './modalBeer.css';
@@ -22,13 +21,11 @@ class ModalBeer extends Component {
     console.log(this.props)
     return (
       <div>
-
         <Modal show={this.props.showModal} onHide={this.props.close.bind(this)}>
           <Modal.Header closeButton>
             <Modal.Title>Beer Information Card</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-
             <BeerPopOver
               beerName     = {this.props.beerName}
               displayName  = {this.props.displayName}
@@ -41,10 +38,9 @@ class ModalBeer extends Component {
               gravity      = {this.props.gravity}
               ibu          = {this.props.ibu}
             />
-
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.props.close.bind(this)}>Close</Button>
+            <a className="waves-effect waves-light btn" onClick={this.props.close.bind(this)}>Close</a>
           </Modal.Footer>
         </Modal>
       </div>
