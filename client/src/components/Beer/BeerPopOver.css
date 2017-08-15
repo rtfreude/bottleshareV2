@@ -183,6 +183,10 @@ thumb {
   font-size: 1.25em;
 }
 
+.beer-desc-header {
+  font-size: 1.5em;
+}
+
 .beer-taste {
   color: black;
   padding-left: 20px;

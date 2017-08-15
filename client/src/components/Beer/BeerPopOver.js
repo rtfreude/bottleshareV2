@@ -106,7 +106,7 @@ class BeerPopOver extends Component {
           </div>
         </div>
           <div>
-            <p className=''><strong>Description</strong></p>
+            <p className='beer-desc-header'><strong>Description</strong></p>
             <p className='beer-desc'>{this.props.beerDesc}</p>
           </div>
       </div>
