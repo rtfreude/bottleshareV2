@@ -1,7 +1,15 @@
+.modal-title {
+  text-align: center;
+}
+
 .modal {
   top: 50px;
   max-height: 100%;
   width: 100%;
+}
+
+.modal .modal-content {
+  padding: 0px;
 }
 
 .modal .modal-footer {
@@ -9,7 +17,7 @@
 }
 
 .modal-dialog {
-    width: 622px;
+    width: 28%;
     margin-left: 15px;
     margin-top: 30px;
 }

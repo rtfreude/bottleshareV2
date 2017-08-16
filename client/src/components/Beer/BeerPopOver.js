@@ -41,13 +41,10 @@ class BeerPopOver extends Component {
     return (
       <div className="beer-info">
         <div className="beer-card-header">
-          <p className="beer-name"><strong>{this.props.displayName}</strong></p>
-
-            <div className='rating-glyph'>
-
-              <span className="glyphicon glyphicon-thumbs-up thumb"></span>
-            </div>
-
+          <div className="header-like">
+            <p className="beer-name"><strong>{this.props.displayName}</strong></p>
+            <span className="glyphicon glyphicon-thumbs-up thumb"></span>
+          </div>
           <p className="beer-type"><i>({this.props.beerStyle})</i></p>
           <img className="beer-label" src={this.props.beerImg} alt="..." />
         </div>
