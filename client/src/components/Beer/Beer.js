@@ -65,12 +65,15 @@ class Beer extends Component {
       .then(() => self.toggleModal())
       .catch(err => console.log('get details error: ' + err))
 
+
+
   }
 
   toggleModal () {
     const self = this;
     self.setState({
-      showModal: !self.state.showModal
+      showModal: !self.state.showModal,
+      inputValue: ''
     })
   }
 
